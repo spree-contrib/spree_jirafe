@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Spree::Jirafe::VERSION
   spec.authors       = ["Washington Luiz"]
   spec.email         = ["huoxito@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "Integrate Spree with Jirafe frontend events"
+  spec.summary       = "Integrate Spree with Jirafe frontend events"
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -20,4 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+
+  spec.add_runtime_dependency "spree", "~> 2.1.2"
 end

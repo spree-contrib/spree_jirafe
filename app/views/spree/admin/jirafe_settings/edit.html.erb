@@ -1,0 +1,25 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:jirafe_settings) %>
+<% end %>
+
+<%= form_tag admin_jirafe_settings_path, :method => :put do %>
+  <div id="preferences" data-hook>
+    <fieldset class="general no-border-top">
+      <div class="field">
+        <%= label_tag(:site_id, Spree.t(:site_id)) + tag(:br) %>
+        <%= preference_field_tag(:site_id, Spree::Jirafe::Config.site_id, :type => :integer) %>
+      </div>
+
+      <div class="field">
+        <%= label_tag(:access_token, Spree.t(:access_token)) + tag(:br) %>
+        <%= preference_field_tag(:access_token, Spree::Jirafe::Config.access_token, :type => :string) %>
+      </div>
+
+      <div class="form-buttons filter-actions actions" data-hook="buttons">
+        <%= button Spree.t('actions.update'), 'icon-refresh' %>
+      </div>
+    </fieldset>
+  </div>
+<% end %>
