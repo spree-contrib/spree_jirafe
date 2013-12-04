@@ -6,7 +6,7 @@
           s.parentNode.insertBefore(g,s);
   })();
 
-  var jirafe_site_id = <%= Spree::Jirafe::Config.site_id %>;
+  var jirafe_site_id = <%= Spree::Jirafe::Config.site_id || '' %>;
   var jirafe_org_id = "";
 
   function jirafe_deferred(jirafe_api) {
