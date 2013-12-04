@@ -1,4 +1,4 @@
-class AddJirafeVisitInfoToSpreeOrders < ActiveRecord::Migration
+class AddVisitInfoToSpreeOrders < ActiveRecord::Migration
   def change
     add_column :spree_orders, :visit_id,         :integer, default: 0
     add_column :spree_orders, :visitor_id,       :integer, default: 0
