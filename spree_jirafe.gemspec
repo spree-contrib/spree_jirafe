@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'spree/jirafe/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "spree-jirafe"
+  spec.name          = "spree_jirafe"
   spec.version       = Spree::Jirafe::VERSION
   spec.authors       = ["Washington Luiz"]
   spec.email         = ["huoxito@gmail.com"]
