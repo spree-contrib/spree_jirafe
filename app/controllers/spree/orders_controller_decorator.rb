@@ -4,11 +4,6 @@ Spree::OrdersController.class_eval do
   private
 
   def set_jirafe_visit_attributes
-    @order = current_order
-    return unless @order
-    @order.visit_id = cookies['jirafe_vis'].to_i || 0
-    @order.visitor_id = cookies['jirafe_vid'].to_i || 0
-
-    @order.save
+    Spree::Jirafe::OrderUpdater.new(current_order, :populate, cookies).perform!
   end
 end
