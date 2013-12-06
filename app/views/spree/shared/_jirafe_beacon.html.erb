@@ -2,7 +2,7 @@
   /* Jirafe */
   (function(){
       var d=document,g=d.createElement('script'),s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript';g.defer=g.async=true;g.src=d.location.protocol+'//sandbox-beacon.jirafe.net/jirafe_api.js';
+          g.type='text/javascript';g.defer=g.async=true;g.src=d.location.protocol+'//beacon.jirafe.com/jirafe_api.js';
           s.parentNode.insertBefore(g,s);
   })();
 
@@ -23,7 +23,18 @@
         };
       <% end %>
 
-      var type = "other";
+      <% if controller_name == "orders" && flash[:notice] == Spree.t(:order_processed_successfully) %>
+
+          var type="order_success";
+          jirafe_api.order.success(jirafe_org_id, jirafe_site_id, {
+              "order": {
+                  "num":  "<%= @order.number %>"
+              }
+          });
+
+      <% else %>
+          var type="other";
+      <% end %>
 
       jirafe_api.pageview(jirafe_org_id, jirafe_site_id, type, data);
   }
