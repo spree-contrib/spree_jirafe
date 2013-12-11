@@ -12,7 +12,6 @@
   function jirafe_deferred(jirafe_api) {
 
       var data = {};
-      var type = "other";
 
       <% if spree_current_user %>
         data.customer = {
@@ -23,7 +22,32 @@
         };
       <% end %>
 
-      <% if controller_name == "orders" && flash[:notice] == Spree.t(:order_processed_successfully) %>
+      // We should wrap all this check into helpers methods
+      // e.g.  var type = jirafe_type_tracker
+      //
+      // Putting each condition into its own method should also help
+      // stores which use a different logic to easily override the default
+      // and successfully integrate with jirafe frontend events
+
+      <% if @product %>
+
+        var type = "product";
+        data.product = {
+            "product_code":  "<%= @product.id %>",
+            "name": "<%= @product.name %>"
+        };
+
+      <% elsif @taxon %>
+
+        var type="category";
+        data.category = {
+            "name": "<%= @taxon.name %>"
+        };
+
+      <% elsif action_name == "edit" && controller_name == "orders" %>
+          var type = "cart";
+
+      <% elsif controller_name == "orders" && flash[:notice] == Spree.t(:order_processed_successfully) %>
 
           var type="order_success";
           jirafe_api.order.success(jirafe_org_id, jirafe_site_id, {
@@ -32,8 +56,17 @@
               }
           });
 
+      <% elsif !params[:keywords].blank? %>
+
+          var type = "search";
+          data.search = {
+              "term": "<%= params[:keywords] %>",
+              "total_results": "<%= @products.count %>",
+              "page": "<%= params[:page] %>"
+          };
+
       <% else %>
-          var type="other";
+          var type = "other";
       <% end %>
 
       jirafe_api.pageview(jirafe_org_id, jirafe_site_id, type, data);
