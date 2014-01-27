@@ -3,7 +3,7 @@ module Spree
     class Engine < ::Rails::Engine
       require 'spree/core'
       engine_name "spree_jirafe"
-      # isolate_namespace Spree
+      isolate_namespace Spree
       config.autoload_paths += %W(#{config.root}/lib)
       config.autoload_paths += %W(#{config.root}/app/controllers)
 
