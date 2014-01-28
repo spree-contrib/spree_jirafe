@@ -10,10 +10,10 @@ module Spree
       end
 
       def perform!
-        order.visit_id         = cookie_data['jirafe_vid'] || 0
-        order.visitor_id       = cookie_data['jirafe_vis'] || 0
-        order.pageview_id      = cookie_data['jirafe_pvid'] || 0
-        order.last_pageview_id = cookie_data['jirafe_lpvid'] || 0
+        order.visit_id         = cookie_data['jirafe_vid'] || '0'
+        order.visitor_id       = cookie_data['jirafe_vis'] || '0'
+        order.pageview_id      = cookie_data['jirafe_pvid'] || '0'
+        order.last_pageview_id = cookie_data['jirafe_lpvid'] || '0'
 
         @order.save if action_name == :new || action_name == :populate
       end
