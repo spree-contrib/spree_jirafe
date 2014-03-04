@@ -1,29 +1,36 @@
-# Spree::Jirafe
+# Spree Jirafe
+===================
 
-TODO: Write a gem description
+Spree extension that adds client side support for [Jirafe](http://jirafe.com) 
+analytics.
 
-## Installation
+Installation	
+=======
 
-Add this line to your application's Gemfile:
+Add this extension to your Gemfile:
 
-    gem 'spree_jirafe'
+```ruby
+gem "spree_jirafe", :github => "spree/spree_jirafe"
+```
 
-And then execute:
+Then run:
 
-    $ bundle
+```
+bundle install
+```
 
-Or install it yourself as:
+Run:
 
-    $ gem install spree_jirafe
+```
+bundle exec rails g spree_jirafe:install
+```
 
-## Usage
+in order to copy over and run the required migrations.
 
-TODO: Write usage instructions here
+Configuration
+=========
 
-## Contributing
+To set your Jirafe credentials, launch your store and head to 
+`/admin/jirafe_settings/edit`.
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Copyright (c) 2014 Spree Commerce Inc., released under the New BSD License
