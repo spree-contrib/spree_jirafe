@@ -6,7 +6,7 @@ module Spree
 
       class ProductWithoutVariantsSerializer < Wombat::ProductSerializer
 
-        attributes :meta_data
+        attributes :meta_data, :created_at, :updated_at
 
         def meta_data
           {
@@ -16,6 +16,16 @@ module Spree
             )
           }
         end
+
+        def created_at
+          object.created_at.getutc.try(:iso8601)
+        end
+
+        def updated_at
+          object.updated_at.getutc.try(:iso8601)
+        end
+
+
       end
 
     end
