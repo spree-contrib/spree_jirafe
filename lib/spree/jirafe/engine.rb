@@ -3,7 +3,7 @@ module Spree
     class Engine < ::Rails::Engine
       require 'spree/core'
       engine_name "spree_jirafe"
-      
+
       config.autoload_paths += %W(#{config.root}/lib)
       config.autoload_paths += %W(#{config.root}/app/controllers)
 
@@ -19,6 +19,7 @@ module Spree
         if ::Rails::Engine.subclasses.map(&:name).include? "Spree::Wombat::Engine"
           product_serializer_path = nil
           Dir.glob(File.join(File.dirname(__FILE__), "../../../lib/**/*_serializer.rb")) do |serializer|
+            Rails.logger.info "LOADING #{serializer}"
             if serializer.match /product_serializer.rb/
               product_serializer_path = serializer
             else

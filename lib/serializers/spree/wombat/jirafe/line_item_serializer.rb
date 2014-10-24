@@ -1,10 +1,11 @@
 require 'active_model/serializer'
+require 'spree/wombat/line_item_serializer'
 
 module Spree
   module Wombat
     module Jirafe
-
-      class LineItemSerializer < Wombat::LineItemSerializer
+      
+      class LineItemSerializer < Spree::Wombat::LineItemSerializer
         attributes :created_at, :updated_at, :variant
 
         def created_at

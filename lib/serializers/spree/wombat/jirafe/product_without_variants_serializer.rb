@@ -1,10 +1,11 @@
 require 'active_model/serializer'
+require 'spree/wombat/product_serializer'
 
 module Spree
   module Wombat
     module Jirafe
 
-      class ProductWithoutVariantsSerializer < Wombat::ProductSerializer
+      class ProductWithoutVariantsSerializer < Spree::Wombat::ProductSerializer
 
         attributes :meta_data, :created_at, :updated_at
 

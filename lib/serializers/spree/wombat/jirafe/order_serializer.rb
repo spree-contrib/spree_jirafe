@@ -1,9 +1,10 @@
 require 'active_model/serializer'
+require 'spree/wombat/order_serializer'
 
 module Spree
   module Wombat
     module Jirafe
-      class OrderSerializer < Wombat::OrderSerializer
+      class OrderSerializer < Spree::Wombat::OrderSerializer
 
         attributes :number, :visit_id, :visitor_id
 
