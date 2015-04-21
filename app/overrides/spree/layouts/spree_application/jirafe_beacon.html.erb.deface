@@ -1,2 +1,0 @@
-<!-- insert_bottom 'body' -->
-<%= render 'spree/shared/jirafe_beacon' %>

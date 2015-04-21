@@ -1,2 +1,0 @@
-<!-- insert_bottom '.sidebar' -->
-<%= configurations_sidebar_menu_item Spree.t(:jirafe_settings), edit_admin_jirafe_settings_path %>

@@ -1,9 +1,9 @@
-<script type="text/javascript">
+<script id='jirafe-script' type="text/javascript">
   /* Jirafe */
   (function(){
-      var d=document,g=d.createElement('script'),s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript';g.defer=g.async=true;g.src=d.location.protocol+'//beacon.jirafe.com/jirafe_api.js';
-          s.parentNode.insertBefore(g,s);
+    var d=document,g=d.createElement('script'),s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript';g.defer=g.async=true;g.src=d.location.protocol+'//beacon.jirafe.com/jirafe_api.js';
+    s.parentNode.insertBefore(g,s);
   })();
 
   var jirafe_site_id = <%= Spree::Jirafe::Config.site_id || '' %>;
@@ -11,16 +11,17 @@
 
   function jirafe_deferred(jirafe_api) {
 
-      var data = {};
+    var data = {};
 
-      <% if spree_current_user %>
-        data.customer = {
-            "id": "<%= spree_current_user.id %>",
-            "firstname": "",
-            "lastname": "",
-            "email": "<%= spree_current_user.email %>"
-        };
-      <% end %>
+    <% if spree_current_user %>
+
+    data.customer = {
+      "id": "<%= spree_current_user.id %>",
+      "firstname": "",
+      "lastname": "",
+      "email": "<%= spree_current_user.email %>"
+    };
+    <% end %>
 
       // We should wrap all this check into helpers methods
       // e.g.  var type = jirafe_type_tracker
@@ -31,44 +32,45 @@
 
       <% if @product %>
 
-        var type = "product";
-        data.product = {
-            "product_code":  "<%= @product.sku %>",
-            "name": "<%= @product.name %>"
-        };
+      var type = "product";
+
+      data.product = {
+        "product_code":  "<%= @product.sku %>",
+        "name": "<%= @product.name %>"
+      };
 
       <% elsif @taxon %>
 
-        var type="category";
-        data.category = {
-            "name": "<%= @taxon.name %>"
-        };
+      var type="category";
+      data.category = {
+        "name": "<%= @taxon.name %>"
+      };
 
       <% elsif action_name == "edit" && controller_name == "orders" %>
-          var type = "cart";
+      var type = "cart";
 
       <% elsif controller_name == "orders" && flash[:notice] == Spree.t(:order_processed_successfully) %>
 
-          var type="order_success";
-          jirafe_api.order.success(jirafe_org_id, jirafe_site_id, {
-              "order": {
-                  "num":  "<%= @order.number %>"
-              }
-          });
+      var type="order_success";
+      jirafe_api.order.success(jirafe_org_id, jirafe_site_id, {
+        "order": {
+          "num":  "<%= @order.number %>"
+        }
+      });
 
       <% elsif !params[:keywords].blank? %>
 
-          var type = "search";
-          data.search = {
-              "term": "<%= params[:keywords] %>",
-              "total_results": "<%= @products.count %>",
-              "page": "<%= params[:page] %>"
-          };
+      var type = "search";
+      data.search = {
+        "term": "<%= params[:keywords] %>",
+        "total_results": "<%= @products.count %>",
+        "page": "<%= params[:page] %>"
+      };
 
       <% else %>
-          var type = "other";
+      var type = "other";
       <% end %>
 
       jirafe_api.pageview(jirafe_org_id, jirafe_site_id, type, data);
-  }
-</script>
+    }
+  </script>
